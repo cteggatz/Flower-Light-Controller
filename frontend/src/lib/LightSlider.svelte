@@ -7,16 +7,19 @@
     <h3>Color {title}</h3>
     <div class = "inputs">
         <div class = "inputElements">
-            <label for="colorInput">Color Seclection:</label>
-            <input type="color" id = "colorInput"/>     
+            <label>
+                Color Selection:
+                <input type="color"/>
+            </label>     
         </div>
         <div class = "inputElements">
-            <label for = "intensity">Light Intensity [0 to 100]: </label>
-            <input type="number"/>
+            <label>
+                Light Intensity [0 to 100]: 
+                <input type="number" defaultValue="1" min = "0" width="5ch"/>
+            </label>
         </div>
     </div>
 </div>
-
 
 
 <style>

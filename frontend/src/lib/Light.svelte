@@ -1,7 +1,8 @@
 <script>
     import LightSlider from "./LightSlider.svelte";
 
-    let {title} = $props();
+
+    let {title, onSave} = $props();
     let cycleColors = $state(false);
 </script>
 
@@ -17,11 +18,11 @@
         <label>
             Cycle Color:
             [<input type="checkbox" bind:checked={cycleColors}/>]
-            <p>Cycle between multiple colors</p>
+            Cycle between multiple colors
         </label> 
         {#if cycleColors}
             <label>
-                Delay (Seconds):
+                Delay (Seconds): 
                 <input type="number" defaultValue="1" min = "0" width="5ch">
                 How long in seconds between each light
             </label>
@@ -40,7 +41,8 @@
     #body {
         background-color: white;
         padding: 2vw;
-
+        margin-bottom: 1vw;
+        margin-top: 1vw;
         border-color: #929982;
         border-style: solid;
         border-radius: 1vh;
@@ -56,19 +58,29 @@
     .generalSettings label {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.1rem;
+        margin-bottom: 0.1vh;
     }
 
     .generalSettings input[type="number"]{
         width: 10ch;
     }
 
-    
-
     h2{
         margin-top: 0.5vh;
+        margin-bottom: 0vh;
     }
     h3{
-        margin-bottom: 0.125vh;
+        margin-bottom: 0vh;
+        padding: 0vh;
+    }
+
+    p{
+        margin-top: 0;
+        margin-bottom: 0vh;
+    }
+
+    label{
+        margin-top:1vh;
     }
 </style>
