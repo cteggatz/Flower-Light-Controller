@@ -1,6 +1,24 @@
 <script>
-    let {title} = $props();
+    let {title, register} = $props();
 
+    // have bindings up here
+    let color = $state();
+    let intensity = $state();
+
+    $effect(() =>{
+        const unregister = register(() => getData())
+        if(unregister instanceof Function){
+            return unregister
+        }
+    })
+
+    function getData(){
+        return {
+            title: title,
+            color: color,
+            intensity: intensity
+        }
+    }
 </script>
 
 <div class = "light">
@@ -9,13 +27,13 @@
         <div class = "inputElements">
             <label>
                 Color Selection:
-                <input type="color"/>
+                <input type="color" bind:value={color}/>
             </label>     
         </div>
         <div class = "inputElements">
             <label>
                 Light Intensity [0 to 100]: 
-                <input type="number" defaultValue="1" min = "0" width="5ch"/>
+                <input type="number" defaultValue="1" min = "0" width="5ch" bind:value={intensity}/>
             </label>
         </div>
     </div>

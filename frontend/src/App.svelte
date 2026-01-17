@@ -2,26 +2,33 @@
     import LightSlider from "./lib/LightSlider.svelte";
     import Light from "./lib/Light.svelte";
 
-    function handleOneData(data){
-
+    let data = {
+      lightOne: false,
+      lightTwo: false
     }
 
-    function handleTwoData(data){
+    let collectors = [];
 
+    function register(fn){
+      collectors.push(fn);
     }
 
+    function sendData(){ 
+      const allData = collectors.map(fn => fn());
+      console.log(allData);
+    }
 </script>
 
 <div class = "app">
   <h1>Light Controller</h1>
 
-  <button>Send To Light</button>
+  <button onclick={sendData}>Send To Light</button>
   
   <!-- First Light Controller-->
-  <Light title = "One" onSave="handleOneData"/>
+  <Light title = "One" register={register}/>
 
   <!-- Second Light Controller -->
-  <Light title = "Two" onSave="handleTwoData"/>
+  <Light title = "Two" register={register}/>
 </div>
 
 <style>

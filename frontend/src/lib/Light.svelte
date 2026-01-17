@@ -1,9 +1,33 @@
 <script>
     import LightSlider from "./LightSlider.svelte";
 
-
-    let {title, onSave} = $props();
+    // get the props
+    let {title, register} = $props();
+    register(() => getState());
+    
+    // set up the lights data collection
+    const lightSliderRegister = new Set();
     let cycleColors = $state(false);
+
+    
+    /**
+     * A callback hander that returns the current state of the light to its 
+     * caller.
+     */
+    function getState(){
+        const lightData = [];
+        for(const rg of lightSliderRegister){
+            lightData.push(rg())
+        };
+
+        return lightData;
+    }
+
+    function registerLight(fn){
+        lightSliderRegister.add(fn)
+        return () => {lightSliderRegister.delete(fn)}
+    }
+
 </script>
 
 
@@ -31,9 +55,9 @@
 
 
     <h3>Light Settings</h3>
-    <LightSlider title = "One"/>
+    <LightSlider title = "One" register = {(fn) => lightSliderRegister.add(fn)}/>
     {#if cycleColors}
-        <LightSlider title = "Two"/>
+        <LightSlider title = "Two" register = {registerLight}/>
     {/if}
 </div>
 
